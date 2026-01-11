@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سورة الأنفال - التحليل اللغوي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* الهوية البصرية المعتمدة - النمط الأزرق */
+            --primary-color: #1a5f7a;
+            --primary-light: #e8f1f5;
+            --accent-color: #d4a373;
+            --text-dark: #333;
+            --bg-body: #f9f9f9;
+            --bg-card: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        /* --- Search Box --- */
+        .search-container {
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(26, 95, 122, 0.1);
+        }
+
+        /* --- Grid Layout (Responsive) --- */
+        .verses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- Verse Card Link --- */
+        .verse-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .verse-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verse-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: var(--primary-light);
+        }
+
+        /* زخرفة جانبية */
+        .verse-card::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .verse-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Badge for Number */
+        .verse-num-badge {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            flex-shrink: 0;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .verse-card:hover .verse-num-badge {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Verse Text */
+        .verse-preview {
+            font-family: 'Amiri', serif;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+
+        .icon-arrow {
+            color: #ccc;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .verse-card:hover .icon-arrow {
+            color: var(--accent-color);
+            transform: translateX(-5px);
+        }
+
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 0; }
+            .verses-grid { 
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .verse-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>سورة الأنفال</h1>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchBox" class="search-input" placeholder="🔍 ابحث برقم الآية أو نصها..." onkeyup="filterVerses()">
+    </div>
+
+    <div class="verses-grid" id="grid-container">
+        </div>
+</div>
+
+<script>
+    // قاعدة بيانات نصوص الآيات (بدايات الآيات لغرض الفهرسة)
+    const surahAnfal = [
+        "يَسْأَلُونَكَ عَنِ الْأَنفَالِ...",
+        "إِنَّمَا الْمُؤْمِنُونَ الَّذِينَ إِذَا ذُكِرَ...",
+        "الَّذِينَ يُقِيمُونَ الصَّلَاةَ وَمِمَّا...",
+        "أُولَٰئِكَ هُمُ الْمُؤْمِنُونَ حَقًّا...",
+        "كَمَا أَخْرَجَكَ رَبُّكَ مِن بَيْتِكَ...",
+        "يُجَادِلُونَكَ فِي الْحَقِّ بَعْدَمَا...",
+        "وَإِذْ يَعِدُكُمُ اللَّهُ إِحْدَى الطَّائِفَتَيْنِ...",
+        "لِيُحِقَّ الْحَقَّ وَيُبْطِلَ الْبَاطِلَ...",
+        "إِذْ تَسْتَغِيثُونَ رَبَّكُمْ فَاسْتَجَابَ...",
+        "وَمَا جَعَلَهُ اللَّهُ إِلَّا بُشْرَىٰ...",
+        "إِذْ يُغَشِّيكُمُ النُّعَاسَ أَمَنَةً...",
+        "إِذْ يُوحِي رَبُّكَ إِلَى الْمَلَائِكَةِ...",
+        "ذَٰلِكَ بِأَنَّهُمْ شَاقُّوا اللَّهَ...",
+        "ذَٰلِكُمْ فَذُوقُوهُ وَأَنَّ لِلْكَافِرِينَ...",
+        "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا لَقِيتُمُ...",
+        "وَمَن يُوَلِّهِمْ يَوْمَئِذٍ دُبُرَهُ...",
+        "فَلَمْ تَقْتُلُوهُمْ وَلَٰكِنَّ اللَّهَ...",
+        "ذَٰلِكُمْ وَأَنَّ اللَّهَ مُوهِنُ...",
+        "إِن تَسْتَفْتِحُوا فَقَدْ جَاءَكُمُ...",
+        "يَا أَيُّهَا الَّذِينَ آمَنُوا أَطِيعُوا...",
+        "وَلَا تَكُونُوا كَالَّذِينَ قَالُوا...",
+        "إِنَّ شَرَّ الدَّوَابِّ عِندَ اللَّهِ...",
+        "وَلَوْ عَلِمَ اللَّهُ فِيهِمْ خَيْرًا...",
+        "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَجِيبُوا...",
+        "وَاتَّقُوا فِتْنَةً لَّا تُصِيبَنَّ...",
+        "وَاذْكُرُوا إِذْ أَنتُمْ قَلِيلٌ...",
+        "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَخُونُوا...",
+        "وَاعْلَمُوا أَنَّمَا أَمْوَالُكُمْ...",
+        "يَا أَيُّهَا الَّذِينَ آمَنُوا إِن تَتَّقُوا...",
+        "وَإِذْ يَمْكُرُ بِكَ الَّذِينَ كَفَرُوا...",
+        "وَإِذَا تُتْلَىٰ عَلَيْهِمْ آيَاتُنَا...",
+        "وَإِذْ قَالُوا اللَّهُمَّ إِن كَانَ...",
+        "وَمَا كَانَ اللَّهُ لِيُعَذِّبَهُمْ...",
+        "وَمَا لَهُمْ أَلَّا يُعَذِّبَهُمُ اللَّهُ...",
+        "وَمَا كَانَ صَلَاتُهُمْ عِندَ الْبَيْتِ...",
+        "إِنَّ الَّذِينَ كَفَرُوا يُنفِقُونَ...",
+        "لِيَمِيزَ اللَّهُ الْخَبِيثَ مِنَ...",
+        "قُل لِّلَّذِينَ كَفَرُوا إِن يَنتَهُوا...",
+        "وَقَاتِلُوهُمْ حَتَّىٰ لَا تَكُونَ...",
+        "وَإِن تَوَلَّوْا فَاعْلَمُوا أَنَّ...",
+        "وَاعْلَمُوا أَنَّمَا غَنِمْتُم مِّن...",
+        "إِذْ أَنتُم بِالْعُدْوَةِ الدُّنْيَا...",
+        "إِذْ يُرِيكَهُمُ اللَّهُ فِي مَنَامِكَ...",
+        "وَإِذْ يُرِيكُمُوهُمْ إِذِ الْتَقَيْتُمْ...",
+        "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا لَقِيتُمْ...",
+        "وَأَطِيعُوا اللَّهَ وَرَسُولَهُ وَلَا...",
+        "وَلَا تَكُونُوا كَالَّذِينَ خَرَجُوا...",
+        "وَإِذْ زَيَّنَ لَهُمُ الشَّيْطَانُ...",
+        "إِذْ يَقُولُ الْمُنَافِقُونَ وَالَّذِينَ...",
+        "وَلَوْ تَرَىٰ إِذْ يَتَوَفَّى الَّذِينَ...",
+        "ذَٰلِكَ بِمَا قَدَّمَتْ أَيْدِيكُمْ...",
+        "كَدَأْبِ آلِ فِرْعَوْنَ ۙ وَالَّذِينَ...",
+        "ذَٰلِكَ بِأَنَّ اللَّهَ لَمْ يَكُ...",
+        "كَدَأْبِ آلِ فِرْعَوْنَ ۙ وَالَّذِينَ...",
+        "إِنَّ شَرَّ الدَّوَابِّ عِندَ اللَّهِ...",
+        "الَّذِينَ عَاهَدتَّ مِنْهُمْ ثُمَّ...",
+        "فَإِمَّا تَثْقَفَنَّهُمْ فِي الْحَرْبِ...",
+        "وَإِمَّا تَخَافَنَّ مِن قَوْمٍ...",
+        "وَلَا يَحْسَبَنَّ الَّذِينَ كَفَرُوا...",
+        "وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم...",
+        "وَإِن جَنَحُوا لِلسَّلْمِ فَاجْنَحْ...",
+        "وَإِن يُرِيدُوا أَن يَخْدَعُوكَ...",
+        "هُوَ الَّذِي أَيَّدَكَ بِنَصْرِهِ...",
+        "يَا أَيُّهَا النَّبِيُّ حَسْبُكَ...",
+        "يَا أَيُّهَا النَّبِيُّ حَرِّضِ...",
+        "الْآنَ خَفَّفَ اللَّهُ عَنكُمْ...",
+        "مَا كَانَ لِنَبِيٍّ أَن يَكُونَ...",
+        "لَوْلَا كِتَابٌ مِّنَ اللَّهِ سَبَقَ...",
+        "فَكُلُوا مِمَّا غَنِمْتُمْ حَلَالًا...",
+        "يَا أَيُّهَا النَّبِيُّ قُل لِّمَن...",
+        "إِنَّ الَّذِينَ آمَنُوا وَهَاجَرُوا...",
+        "إِنَّ الَّذِينَ آمَنُوا وَهَاجَرُوا...",
+        "وَالَّذِينَ كَفَرُوا بَعْضُهُمْ...",
+        "وَالَّذِينَ آمَنُوا وَهَاجَرُوا...",
+        "وَالَّذِينَ آمَنُوا مِن بَعْدُ..."
+    ];
+
+    const grid = document.getElementById('grid-container');
+
+    function generateCards() {
+        grid.innerHTML = '';
+        surahAnfal.forEach((text, index) => {
+            const verseNum = index + 1;
+            const cardLink = document.createElement('a');
+            
+            // الربط بملفات الآيات في المجلد الفرعي
+            cardLink.href = `verses/ayah${verseNum}.html`; 
+            cardLink.className = 'verse-link';
+            
+            // بيانات للبحث
+            cardLink.setAttribute('data-search', `${verseNum} ${text}`);
+
+            cardLink.innerHTML = `
+                <div class="verse-card">
+                    <div class="verse-num-badge">${verseNum}</div>
+                    <div class="verse-preview">${text}</div>
+                    <div class="icon-arrow">←</div>
+                </div>
+            `;
+            grid.appendChild(cardLink);
+        });
+    }
+
+    function filterVerses() {
+        const input = document.getElementById('searchBox').value.toLowerCase();
+        const cards = document.getElementsByClassName('verse-link');
+
+        for (let i = 0; i < cards.length; i++) {
+            const searchData = cards[i].getAttribute('data-search');
+            if (searchData.includes(input)) {
+                cards[i].style.display = "block";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+
+    generateCards();
+</script>
+
+</body>
+</html>
