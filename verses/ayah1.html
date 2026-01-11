@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل سورة الأنفال - الآية ١</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --primary-light: #e8f2f5;
+            --accent-color: #c89666;
+            --text-dark: #2d3436;
+            --text-medium: #555;
+            --bg-body: #f8fafb;
+            --bg-card: #ffffff;
+            --border-color: #e8eef2;
+            --border-radius: 16px;
+            --shadow-soft: 0 8px 24px -8px rgba(26, 95, 122, 0.12);
+            --shadow-hover: 0 12px 32px -8px rgba(26, 95, 122, 0.18);
+            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f8fafb 0%, #e8f2f5 100%);
+            color: var(--text-dark);
+            padding: 24px 16px 60px;
+            line-height: 1.8;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- Header Section --- */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+            padding: 24px 32px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .page-title {
+            font-family: 'Amiri', serif;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            color: var(--text-dark);
+            background: var(--bg-body);
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: 2px solid var(--border-color);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* --- Sticky Verse Container --- */
+        .verse-container {
+            position: relative;
+            z-index: 10;
+            background: white;
+            backdrop-filter: blur(12px);
+            padding: 24px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--primary-light);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .quran-word {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            line-height: 2;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 6px 10px;
+            margin: 2px;
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .quran-word::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 0;
+            height: 3px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .quran-word:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .quran-word:hover::after {
+            width: 70%;
+        }
+
+        .quran-word.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #15516a 100%);
+            color: #fff;
+            transform: scale(1.06);
+            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.3);
+        }
+
+        .quran-word.active::after {
+            display: none;
+        }
+
+        .non-interactive {
+            font-family: 'Amiri', serif;
+            font-size: 1.6rem;
+            line-height: 2;
+            color: #95a5a6;
+            margin: 0 2px;
+        }
+
+        .verse-number {
+            font-family: 'Amiri', serif;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-right: 8px;
+            vertical-align: middle;
+            display: inline-block;
+            background: var(--primary-light);
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        /* --- Analysis Cards Grid --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            display: none;
+            animation: fadeUp 0.4s ease forwards;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+
+        @keyframes fadeUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        .card.visible { display: block; }
+
+        .card-header {
+            background: linear-gradient(to left, var(--primary-light), #f0f8fa);
+            padding: 20px 28px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-word-title {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .card-context {
+            font-size: 0.85rem;
+            background: white;
+            color: var(--text-medium);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            font-weight: 500;
+        }
+
+        .card-body { 
+            padding: 28px; 
+        }
+
+        .info-row {
+            margin-bottom: 22px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .info-row:last-child { 
+            border-bottom: none; 
+            margin-bottom: 0; 
+            padding-bottom: 0; 
+        }
+
+        .info-label {
+            font-size: 1.05rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            border-right: 4px solid var(--accent-color);
+        }
+
+        ul.info-list { 
+            list-style: none; 
+            padding-right: 8px;
+        }
+        
+        ul.info-list li {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 24px;
+            color: var(--text-medium);
+            line-height: 1.9;
+        }
+        
+        ul.info-list li::before {
+            content: "◆";
+            color: var(--accent-color);
+            position: absolute;
+            right: 0;
+            font-size: 0.75em;
+            top: 6px;
+        }
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 1024px) {
+            .cards-grid { 
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { 
+                padding: 16px 12px 40px; 
+                font-size: 15px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+            
+            .page-title {
+                font-size: 1.35rem;
+                text-align: center;
+            }
+            
+            .nav-btn { 
+                width: 100%; 
+                justify-content: center;
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
+            
+            .verse-container { 
+                padding: 20px 16px;
+                margin-bottom: 24px;
+            }
+            
+            .quran-word, .non-interactive { 
+                font-size: 1.4rem; 
+                line-height: 1.9; 
+                padding: 5px 8px;
+                margin: 1px;
+            }
+            
+            .verse-number {
+                font-size: 1.15rem;
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+            }
+            
+            .cards-grid { 
+                grid-template-columns: 1fr; 
+                gap: 18px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .card-word-title {
+                font-size: 1.35rem;
+            }
+
+            .card-header {
+                padding: 16px 20px;
+            }
+
+            .info-label {
+                font-size: 0.95rem;
+                padding: 6px 10px;
+            }
+            
+            ul.info-list li {
+                font-size: 0.93rem;
+                padding-right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px 10px 30px;
+                font-size: 14px;
+            }
+
+            .page-header {
+                padding: 14px 16px;
+            }
+
+            .page-title {
+                font-size: 1.2rem;
+            }
+
+            .nav-btn {
+                padding: 9px 20px;
+                font-size: 0.85rem;
+            }
+
+            .verse-container {
+                padding: 16px 12px;
+            }
+
+            .quran-word, .non-interactive { 
+                font-size: 1.25rem;
+                padding: 4px 6px;
+                margin: 1px;
+                line-height: 1.85;
+            }
+            
+            .verse-number {
+                font-size: 1rem;
+                width: 26px;
+                height: 26px;
+                line-height: 26px;
+            }
+
+            .card-body {
+                padding: 18px;
+            }
+
+            .card-header {
+                padding: 14px 18px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .card-word-title {
+                font-size: 1.25rem;
+            }
+
+            .card-context {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .info-label {
+                font-size: 0.9rem;
+                padding: 6px 8px;
+            }
+            
+            ul.info-list li {
+                font-size: 0.88rem;
+                padding-right: 18px;
+                line-height: 1.75;
+            }
+
+            .info-row {
+                margin-bottom: 16px;
+                padding-bottom: 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .quran-word, .non-interactive { 
+                font-size: 1.15rem;
+                padding: 3px 5px;
+            }
+
+            .card-word-title {
+                font-size: 1.15rem;
+            }
+
+            ul.info-list li {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <header class="page-header">
+        <h1 class="page-title">تحليل سورة الأنفال - الآية ١</h1>
+        <a href="../index.html" class="nav-btn">
+            <span>العودة للفهرس</span>
+            <span>←</span>
+        </a>
+    </header>
+
+    <div class="verse-container" id="verse-content"></div>
+
+    <div id="cards-area" class="cards-grid"></div>
+
+</div>
+
+<script>
+    const verseData = [
+        {
+            text: "يَسْأَلُونَكَ",
+            data: {
+                word: "يَسْأَلُونَكَ",
+                morph: null,
+                syntax: ["فعل مضارع مرفوع بثبوت النون.", "الواو: ضمير متصل مبني على السكون في محل رفع فاعل.", "الكاف: في محل نصب مفعول به."],
+                semantic: ["معناه: سؤال استفتاء لحل الخلاف."]
+            }
+        },
+        {
+            text: "عَنِ",
+            data: {
+                word: "عَنِ",
+                morph: ["حُرِّكت بالكسر لالتقائها بسكون اللام بعدها."],
+                syntax: ["تتعلق بـ «يسأل»."],
+                semantic: ["معناها: للمجاوزة المجازية."]
+            }
+        },
+        {
+            text: "الْأَنفَالِ",
+            data: {
+                word: "الْأَنفَالِ",
+                context: "(الأولى)",
+                morph: ["المصدر: من مصدر: نَفَلَ، ومصدر: نَفْل.", "جمع نَفَل، وهو على وزن «فَعَل» بمعنى اسم المفعول للمبالغة."],
+                syntax: ["(مجرورة بحرف الجر)."],
+                semantic: ["عُبِّر به عن اسم الذات لتوكيد المبالغة.", "المعنى: غنائم بدر، وما يُعطاه المجاهد زيادة على نصيبه."]
+            }
+        },
+        { text: "ۖ", isStop: true },
+        {
+            text: "قُلِ",
+            data: {
+                word: "قُلِ",
+                morph: ["فعل أمر مبني على السكون، وحُرِّك بالكسر لالتقائه بسكون لام التعريف بعده."],
+                syntax: ["الفاعل: ضمير مستتر وجوباً تقديره: أنت.", "الجملة: ابتدائية (استئنافية بيانية)."],
+                semantic: ["الخطاب للنبي محمد ﷺ."]
+            }
+        },
+        {
+            text: "الْأَنفَالُ",
+            data: {
+                word: "الْأَنفَالُ",
+                context: "(الثانية)",
+                morph: null,
+                syntax: ["مبتدأ مرفوع.", "الخبر محذوف (تقديره: حكمها) أو متعلق الجار والمجرور بعده."],
+                semantic: null
+            }
+        },
+        {
+            text: "لِلَّهِ",
+            data: {
+                word: "لِلَّهِ",
+                morph: null,
+                syntax: ["اللام: للاختصاص حرف جر.", "الجار والمجرور: متعلقان بالخبر المحذوف."],
+                semantic: ["المعنى: حكمها مختص به تعالى."]
+            }
+        },
+        {
+            text: "وَالرَّسُولِ",
+            data: {
+                word: "وَالرَّسُولِ",
+                morph: ["(أل): عهدية ذهنية."],
+                syntax: ["معطوف على لفظ الجلالة مجرور بالعطف."],
+                semantic: ["المعنى: يقسمها الرسول دون تدخل أحد."]
+            }
+        },
+        { text: "ۖ", isStop: true },
+        {
+            text: "فَاتَّقُوا",
+            data: {
+                word: "فَاتَّقُوا",
+                morph: ["الألف: حرف زائد رسماً للتفريق بين واو الضمير والواو التي هي لام الفعل."],
+                syntax: ["الفاء: هي الفصيحة للاستئناف والسببية.", "اتقوا: فعل أمر مبني على حذف النون.", "الواو: في محل رفع فاعل.", "الجملة: استئنافية ضمن مقول القول."],
+                semantic: ["المعنى: خافوه بتجنب عصيانه ولزوم طاعته."]
+            }
+        },
+        {
+            text: "اللَّهَ",
+            data: {
+                word: "اللَّهَ",
+                morph: null,
+                syntax: ["لفظ الجلالة منصوب (مفعول به)."],
+                semantic: null
+            }
+        },
+        {
+            text: "وَأَصْلِحُوا",
+            data: {
+                word: "وَأَصْلِحُوا",
+                morph: null,
+                syntax: ["الجملة: عُطفت عليها الجملتان فهي لا محل لها من الإعراب."],
+                semantic: ["المعنى: أزيلوا ما فيه من الخلاف.", "أي: ما بينكم بالمودة وترك النزاع."]
+            }
+        },
+        {
+            text: "ذَاتَ",
+            data: {
+                word: "ذَاتَ",
+                morph: null,
+                syntax: ["مفعول به للفعل قبله (أصلحوا) منصوب."],
+                semantic: ["ذات الشيء: حقيقته ونفسه."]
+            }
+        },
+        {
+            text: "بَيْنِكُمْ",
+            data: {
+                word: "بَيْنِكُمْ",
+                morph: ["الميم: حرف لجمع الذكور."],
+                syntax: ["بين: مضاف إليه مجرور ومضاف.", "الكاف: ضمير متصل في محل جر مضاف إليه."],
+                semantic: ["البين: الصلات والروابط."]
+            }
+        },
+        { text: "ۖ", isStop: true },
+        {
+            text: "وَأَطِيعُوا",
+            data: {
+                word: "وَأَطِيعُوا",
+                morph: null,
+                syntax: ["الجملة: معطوفة على ما قبلها."],
+                semantic: ["المعنى: سلموا لهما الأمر والحكم في الأنفال وغيرها."]
+            }
+        },
+        { text: "اللَّهَ وَرَسُولَهُ", isStop: true },
+        {
+            text: "إِن",
+            data: {
+                word: "إِن",
+                morph: null,
+                syntax: ["حرف شرط جازم.", "موقعه: شرطية للحال."],
+                semantic: ["معناها: التهييج والتشويق والحث على المسارعة إلى الامتثال."]
+            }
+        },
+        {
+            text: "كُنتُم",
+            data: {
+                word: "كُنتُم",
+                morph: ["الميم: حرف لجمع الذكور."],
+                syntax: ["كنتم: فعل ماض ناقص مبني على السكون لاتصاله بضمير رفع متحرك، في محل جزم.", "التاء: ضمير متصل مبني على الضم في محل رفع اسم «كان».", "جواب الشرط: محذوف لدلالة ما قبله عليه، تقديره: فاتقوا الله."],
+                semantic: ["حذف الجواب: فيه إيجاز وتوكيد بتكرار الجملة مذكورة ومقدرة."]
+            }
+        },
+        {
+            text: "مُّؤْمِنِينَ",
+            data: {
+                word: "مُّؤْمِنِينَ",
+                morph: null,
+                syntax: ["خبر لـ «كان» منصوب بالياء.", "الجملة الشرطية (الكبرى): في محل نصب حال من فاعلي الأفعال الثلاثة."],
+                semantic: ["المعنى: حقاً. من عرف قلبه التوحيد وما يلزمه."]
+            }
+        }
+    ];
+
+    const verseContainer = document.getElementById('verse-content');
+    const cardsArea = document.getElementById('cards-area');
+    let activeIndex = null;
+
+    function init() {
+        verseData.forEach((item, index) => {
+            const span = document.createElement('span');
+            span.textContent = item.text;
+            
+            if (item.data) {
+                span.classList.add('quran-word');
+                span.dataset.index = index;
+                span.onclick = () => toggleCard(index);
+                createCardHTML(item.data, index);
+            } else {
+                span.classList.add('non-interactive');
+            }
+            
+            verseContainer.appendChild(span);
+            verseContainer.appendChild(document.createTextNode(" "));
+        });
+
+        const numSpan = document.createElement('span');
+        numSpan.className = 'verse-number';
+        numSpan.textContent = '١';
+        verseContainer.appendChild(numSpan);
+    }
+
+    function createCardHTML(data, index) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.id = `card-${index}`;
+        
+        let html = `
+            <div class="card-header">
+                <span class="card-word-title">${data.word}</span>
+                ${data.context ? `<span class="card-context">${data.context}</span>` : ''}
+            </div>
+            <div class="card-body">`;
+        
+        if (data.morph) html += generateSection('📚 الصرف والبنية', data.morph);
+        if (data.syntax) html += generateSection('🔤 النحو والإعراب', data.syntax);
+        if (data.semantic) html += generateSection('💡 الدلالة والبلاغة', data.semantic);
+        
+        html += `</div>`;
+        card.innerHTML = html;
+        cardsArea.appendChild(card);
+    }
+
+    function generateSection(title, items) {
+        return `
+            <div class="info-row">
+                <div class="info-label">${title}</div>
+                <ul class="info-list">
+                    ${items.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    function toggleCard(index) {
+        const wordEl = document.querySelector(`.quran-word[data-index="${index}"]`);
+        const cardEl = document.getElementById(`card-${index}`);
+
+        if (activeIndex === index) {
+            wordEl.classList.remove('active');
+            cardEl.classList.remove('visible');
+            activeIndex = null;
+            return;
+        }
+
+        if (activeIndex !== null) {
+            const prevWord = document.querySelector(`.quran-word[data-index="${activeIndex}"]`);
+            const prevCard = document.getElementById(`card-${activeIndex}`);
+            if (prevWord) prevWord.classList.remove('active');
+            if (prevCard) prevCard.classList.remove('visible');
+        }
+
+        wordEl.classList.add('active');
+        cardEl.classList.add('visible');
+        activeIndex = index;
+
+        // تمرير ناعم للموبايل
+        if (window.innerWidth < 768) {
+            setTimeout(() => {
+                cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+        }
+    }
+
+    init();
+</script>
+
+</body>
+</html>
